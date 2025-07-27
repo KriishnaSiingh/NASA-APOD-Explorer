@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NASA APOD Explorer</title>
+    <link href="styles.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen text-white font-sans transition-colors duration-500" id="themeContainer">
+    <canvas id="stars" class="stars"></canvas>
+    <div class="container mx-auto p-6 max-w-5xl z-10">
+        <h1 class="text-5xl font-extrabold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500 animate-fade-in">
+            NASA APOD Explorer 🚀
+        </h1>
+        <div class="flex flex-wrap gap-4 justify-center mb-6 animate-fade-in">
+            <input type="date" id="datePicker" class="glass text-black p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" max="2025-07-27" />
+            <button id="fetchButton" class="btn-cyan">Fetch APOD</button>
+            <button id="randomButton" class="btn-purple">Random APOD</button>
+            <button id="hdToggle" class="hidden btn-green">Toggle HD</button>
+            <button id="toggleTheme" class="btn-yellow">Toggle Theme</button>
+        </div>
+        <div id="loading" class="hidden flex justify-center mb-6">
+            <div class="spinner"></div>
+        </div>
+        <div id="error" class="hidden text-center text-red-300 text-lg p-4 glass rounded-lg"></div>
+        <div id="apodContent" class="hidden glass rounded-xl shadow-2xl p-6 transform transition hover:scale-105 animate-fade-in">
+            <h2 id="title" class="text-3xl font-semibold mb-4 text-cyan-300"></h2>
+            <p id="date" class="text-gray-300 mb-4"></p>
+            <div id="mediaContainer" class="mb-6 rounded-lg overflow-hidden transition-all duration-300"></div>
+            <p id="explanation" class="text-gray-200 leading-relaxed"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
