@@ -1,53 +1,55 @@
-const fetchButton = document.getElementById('fetchButton');
-const randomButton = document.getElementById('randomButton');
-const hdToggle = document.getElementById('hdToggle');
-const toggleTheme = document.getElementById('toggleTheme');
-const datePicker = document.getElementById('datePicker');
-const loading = document.getElementById('loading');
-const errorDiv = document.getElementById('error');
-const apodContent = document.getElementById('apodContent');
-const title = document.getElementById('title');
-const date = document.getElementById('date');
-const mediaContainer = document.getElementById('mediaContainer');
-const explanation = document.getElementById('explanation');
-const themeContainer = document.getElementById('themeContainer');
-const apiKey = 'DEMO_KEY';
-let currentData = null;
-let isHD = false;
-const canvas = document.getElementById('stars');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const stars = Array.from({ length: 150 }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 1.5,
-    opacity: Math.random()
+const fetchButton=document.getElementById('fetchButton');
+const randomButton=document.getElementById('randomButton');
+const hdToggle=document.getElementById('hdToggle');
+const toggleTheme=document.getElementById('toggleTheme');
+const datePicker=document.getElementById('datePicker');
+const loading=document.getElementById('loading');
+const errorDiv=document.getElementById('error');
+const apodContent=document.getElementById('apodContent');
+const title=document.getElementById('title');
+const date=document.getElementById('date');
+const mediaContainer=document.getElementById('mediaContainer');
+const explanation=document.getElementById('explanation');
+const themeContainer=document.getElementById('themeContainer');
+const apiKey='DEMO_KEY';
+let currentData=null;
+let isHD=false;
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+const stars=Array.from({ length: 150 }, () => ({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    radius:Math.random()*1.5,
+    opacity:Math.random()
 }));
 function animateStars() 
 {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    stars.forEach(star => {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    stars.forEach(star=>{
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+        ctx.arc(star.x,star.y,star.radius,0,Math.PI*2);
+        ctx.fillStyle=`rgba(255, 255, 255, ${star.opacity})`;
         ctx.fill();
-        star.opacity += (Math.random() - 0.5) * 0.05;
-        star.opacity = Math.max(0, Math.min(1, star.opacity));
+        star.opacity+=(Math.random()-0.5)*0.05;
+        star.opacity=Math.max(0,Math.min(1,star.opacity));
     });
     requestAnimationFrame(animateStars);
 }
 animateStars();
-const cachedAPOD = localStorage.getItem('apodData');
-if (cachedAPOD) displayAPOD(JSON.parse(cachedAPOD));
-async function fetchAPOD(date = '') {
+const cachedAPOD=localStorage.getItem('apodData');
+if(cachedAPOD)displayAPOD(JSON.parse(cachedAPOD));
+async function fetchAPOD(date='') 
+{
     loading.classList.remove('hidden');
     errorDiv.classList.add('hidden');
     apodContent.classList.add('hidden');
-    mediaContainer.innerHTML = '';
+    mediaContainer.innerHTML='';
     hdToggle.classList.add('hidden');
-    try {
-        const url = date
+    try 
+    {
+        const url=date
             ? `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`
             : `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
         const response = await fetch(url);
