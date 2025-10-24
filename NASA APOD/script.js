@@ -72,19 +72,22 @@ function displayAPOD(data)
     date.textContent = `📅 ${data.date}`;
     explanation.textContent = data.explanation;
     mediaContainer.innerHTML = '';
-    if (data.media_type === 'image') {
+    if (data.media_type === 'image') 
+    {
         const imgUrl = isHD && data.hdurl ? data.hdurl : data.url;
         mediaContainer.innerHTML = `
             <img src="${imgUrl}" alt="${data.title}"
                  class="w-full h-auto rounded-lg shadow-md transform hover:scale-105 transition-all duration-300" />
         `;
         if (data.hdurl) hdToggle.classList.remove('hidden');
-    } else if (data.media_type === 'video') {
+    } else if (data.media_type === 'video') 
+    {
         mediaContainer.innerHTML = `
             <iframe src="${data.url}" class="w-full h-96 rounded-lg shadow-md"
                     frameborder="0" allowfullscreen></iframe>
         `;
-    } else {
+    } else 
+    {
         throw new Error('Unsupported media type');
     }
 
@@ -97,11 +100,14 @@ function getRandomDate()
     const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     return date.toISOString().split('T')[0];
 }
-toggleTheme.addEventListener('click', () => {
-    if (document.body.classList.contains('dark-mode')) {
+toggleTheme.addEventListener('click', () => 
+    {
+    if (document.body.classList.contains('dark-mode')) 
+    {
         document.body.classList.remove('dark-mode');
         document.body.classList.add('light-mode');
-    } else {
+    } else 
+    {
         document.body.classList.remove('light-mode');
         document.body.classList.add('dark-mode');
     }
